@@ -73,7 +73,7 @@
     }
     function showRemaining (){
     now = new Date();
-    days_in_this_semester = new Date("2025-06-15T00:00:00"); 
+    days_in_this_semester = new Date("2025-06-15T00:00:00").getDate(); 
     days = days_in_this_semester - now.getDate();
     hours = 23 - now.getHours();
     minutes = 59 - now.getMinutes();
