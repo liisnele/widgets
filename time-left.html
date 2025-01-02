@@ -71,19 +71,29 @@
     left_seconds = document.getElementById("seconds");
  
     }
-    function showRemaining (){
-    now = new Date();
-    days_in_this_semester = new Date("2025-06-15T00:00:00").getDate(); 
-    days = days_in_this_semester - now.getDate();
-    hours = 23 - now.getHours();
-    minutes = 59 - now.getMinutes();
-    seconds = 59 - now.getSeconds();
-    left_days.innerHTML = days + "<br> <span class=\"small\"> days </span>"
-    left_hours.innerHTML = hours + "<br> <span class=\"small\"> hours</span>";
-    left_minutes.innerHTML = minutes + "<br> <span class=\"small\">mins</span>";
-    left_seconds.innerHTML = seconds + "<br> <span class=\"small\">secs</span>";
-    }
+    function showRemaining() {
+        const targetDate = new Date("2025-06-15T00:00:00");
+        const now = new Date();
+        const timeDifference = targetDate - now;
 
+        if (timeDifference > 0) {
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            left_days.innerHTML = days + "<br> <span class=\"small\"> days </span>";
+            left_hours.innerHTML = hours + "<br> <span class=\"small\"> hours</span>";
+            left_minutes.innerHTML = minutes + "<br> <span class=\"small\">mins</span>";
+            left_seconds.innerHTML = seconds + "<br> <span class=\"small\">secs</span>";
+        } else {
+            clearInterval(timer);
+            left_days.innerHTML = "0<br> <span class=\"small\"> days </span>";
+            left_hours.innerHTML = "0<br> <span class=\"small\"> hours</span>";
+            left_minutes.innerHTML = "0<br> <span class=\"small\">mins</span>";
+            left_seconds.innerHTML = "0<br> <span class=\"small\">secs</span>";
+        }
+    }
 timer = setInterval (showRemaining, 1000) 
 CountDownTimer() ;
 </script>
